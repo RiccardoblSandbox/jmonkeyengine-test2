@@ -1,36 +1,25 @@
 name: auto-format
-on: pull_request
+
+on:
+  pull_request:
+
 jobs:
-  format:
+  prettier:
     runs-on: ubuntu-latest
+
     steps:
-      - name: Setup Node.js environment
-        uses: actions/setup-node@v3.8.1
+      - name: Checkout
+        uses: actions/checkout@v3
         with:
-          node-version: 16
-          
-      - uses: actions/checkout@v1
-        with:
+          # Make sure the actual branch is checked out when running on pull requests
           ref: ${{ github.head_ref }}
-          
-      - name: Install prettier
-        run: |
-          npm install -g prettier
-          npm install -g prettier prettier-plugin-java
-          
-      - name: Run formatter
-        run: |
-          prettier --tab-width 4 --write *.java
-          
-      - name: Check for modified files
-        id: git-check
-        run: echo "modified=$(if git diff-index --quiet HEAD --; then echo "false"; else echo "true"; fi)" >> $GITHUB_OUTPUT
-        
-      - name: Push changes
-        if: steps.git-check.outputs.modified == 'true'
-        run: |
-          git config --global user.name "Github Actions"
-          git config --global user.email "actions@users.noreply.github.com"
-          git remote set-url origin https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}
-          git commit -m "[skip ci] auto format"
-          git push
+          # This is important to fetch the changes to the previous commit
+          fetch-depth: 0
+
+      - name: Prettify code
+        uses: creyD/prettier_action@v4.3
+        with:
+          # This part is also where you can pass other options, for example:
+          prettier_options: --write **/*.{java}
+          only_changed: True
+          prettier_plugins: "prettier-plugin-java"
