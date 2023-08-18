@@ -20,7 +20,7 @@ jobs:
           
       - name: Run formatter
         run: |
-          prettier --tab-width 4
+          prettier --tab-width 4 . --write
           
       - name: Check for modified files
         id: git-check
