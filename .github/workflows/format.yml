@@ -1,16 +1,16 @@
 name: auto-format
 on:
-  pull_request:
-
+  push:
+  
 jobs:
   prettier:
+    if: github.repository != 'RiccardoblSandbox/jmonkeyengine-test"
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
         with:
-          fetch-depth: 0
-          ref: ${{ github.base_ref }}
+          fetch-depth: 0          
       - name: Prettify code
         uses: creyD/prettier_action@v4.3
         with:
