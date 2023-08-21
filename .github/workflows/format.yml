@@ -4,8 +4,8 @@ on:
   
 jobs:
   prettier:
-    if: github.repository != 'RiccardoblSandbox/jmonkeyengine-test"
     runs-on: ubuntu-latest
+    if: github.repository != 'RiccardoblSandbox/jmonkeyengine-test'
     steps:
       - name: Checkout
         uses: actions/checkout@v3
