@@ -53,7 +53,9 @@ public interface ClientStateListener
      *  connection normally, otherwise the info object contains
      *  additional information about the disconnect.
      */   
-    public void clientDisconnected( Client c, DisconnectInfo info );
+    public void clientDisconnected( 
+        
+        Client c, DisconnectInfo info );
  
     /**
      *  Provided with the clientDisconnected() notification to
