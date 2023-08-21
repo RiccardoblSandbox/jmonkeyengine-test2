@@ -31,17 +31,15 @@
  */
 package com.jme3.input;
 
+import com.jme3.input.KeyInput;
+import com.jme3.input.event.KeyInputEvent;
+import com.jme3.system.AWTContext;
 import java.awt.Component;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.Map;
-
-import com.jme3.input.KeyInput;
-import com.jme3.input.event.KeyInputEvent;
-import com.jme3.system.AWTContext;
-
 
 /**
  * The implementation of the {@link KeyInput} dedicated to AWT {@link Component component}.
@@ -51,12 +49,14 @@ import com.jme3.system.AWTContext;
  * @author Julien Seinturier - COMEX SA - <a href="http://www.seinturier.fr">http://www.seinturier.fr</a>
  * @author Alexander Brui (JavaSaBr)
  */
-public class AWTKeyInput extends AWTInput implements KeyInput, KeyListener{
+public class AWTKeyInput extends AWTInput implements KeyInput, KeyListener {
 
     private static final Map<Integer, Integer> KEY_CODE_TO_JME = new HashMap<>();
 
-    static {        KEY_CODE_TO_JME.put(KeyEvent.VK_ESCAPE, KEY_ESCAPE);
-        KEY_CODE_TO_JME.put(KeyEvent.VK_0, KEY_0);        KEY_CODE_TO_JME.put(KeyEvent.VK_1, KEY_1);
+    static {
+        KEY_CODE_TO_JME.put(KeyEvent.VK_ESCAPE, KEY_ESCAPE);
+        KEY_CODE_TO_JME.put(KeyEvent.VK_0, KEY_0);
+        KEY_CODE_TO_JME.put(KeyEvent.VK_1, KEY_1);
         KEY_CODE_TO_JME.put(KeyEvent.VK_2, KEY_2);
         KEY_CODE_TO_JME.put(KeyEvent.VK_3, KEY_3);
         KEY_CODE_TO_JME.put(KeyEvent.VK_4, KEY_4);
@@ -186,21 +186,20 @@ public class AWTKeyInput extends AWTInput implements KeyInput, KeyListener{
     }
 
     private void onKeyEvent(KeyEvent keyEvent, boolean pressed) {
-
         int code = convertKeyCode(keyEvent.getID());
         char keyChar = keyEvent.getKeyChar();
 
         final KeyInputEvent event = new KeyInputEvent(code, keyChar, pressed, false);
         event.setTime(getInputTimeNanos());
 
-        EXECUTOR.addToExecute(new Runnable() {
-
-          @Override
-          public void run() {
-            keyInputEvents.add(event);
-          }
-          
-        });
+        EXECUTOR.addToExecute(
+            new Runnable() {
+                @Override
+                public void run() {
+                    keyInputEvents.add(event);
+                }
+            }
+        );
     }
 
     @Override
@@ -217,24 +216,24 @@ public class AWTKeyInput extends AWTInput implements KeyInput, KeyListener{
 
     @Override
     public void keyTyped(KeyEvent e) {
-      System.out.println("Key typed "+e.getKeyChar());
-      //onKeyEvent(e, false);
+        System.out.println("Key typed " + e.getKeyChar());
+        //onKeyEvent(e, false);
     }
 
     @Override
     public void keyPressed(KeyEvent e) {
-      System.out.println("Key pressed "+e.getKeyChar());
-      onKeyEvent(e, true);
+        System.out.println("Key pressed " + e.getKeyChar());
+        onKeyEvent(e, true);
     }
 
     @Override
     public void keyReleased(KeyEvent e) {
-      System.out.println("Key released "+e.getKeyChar());
-      onKeyEvent(e, false);
+        System.out.println("Key released " + e.getKeyChar());
+        onKeyEvent(e, false);
     }
 
     @Override
-    public String getKeyName(int key){
-      throw new UnsupportedOperationException("getKeyName is not implemented in AWTKeyInput");
+    public String getKeyName(int key) {
+        throw new UnsupportedOperationException("getKeyName is not implemented in AWTKeyInput");
     }
 }
