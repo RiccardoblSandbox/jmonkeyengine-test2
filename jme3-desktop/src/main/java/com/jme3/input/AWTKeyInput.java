@@ -55,10 +55,8 @@ public class AWTKeyInput extends AWTInput implements KeyInput, KeyListener{
 
     private static final Map<Integer, Integer> KEY_CODE_TO_JME = new HashMap<>();
 
-    static {
-        KEY_CODE_TO_JME.put(KeyEvent.VK_ESCAPE, KEY_ESCAPE);
-        KEY_CODE_TO_JME.put(KeyEvent.VK_0, KEY_0);
-        KEY_CODE_TO_JME.put(KeyEvent.VK_1, KEY_1);
+    static {        KEY_CODE_TO_JME.put(KeyEvent.VK_ESCAPE, KEY_ESCAPE);
+        KEY_CODE_TO_JME.put(KeyEvent.VK_0, KEY_0);        KEY_CODE_TO_JME.put(KeyEvent.VK_1, KEY_1);
         KEY_CODE_TO_JME.put(KeyEvent.VK_2, KEY_2);
         KEY_CODE_TO_JME.put(KeyEvent.VK_3, KEY_3);
         KEY_CODE_TO_JME.put(KeyEvent.VK_4, KEY_4);
