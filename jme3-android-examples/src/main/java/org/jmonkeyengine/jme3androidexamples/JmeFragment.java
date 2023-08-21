@@ -12,8 +12,7 @@ public class JmeFragment extends AndroidHarnessFragment {
 
     public JmeFragment() {
         // Set the desired EGL configuration
-        eglBitsPerPixel = 24;
-        eglAlphaBits = 0;
+        eglBitsPerPixel =24;        eglAlphaBits = 0;
         eglDepthBits = 16;
         eglSamples = 0;
         eglStencilBits = 0;
